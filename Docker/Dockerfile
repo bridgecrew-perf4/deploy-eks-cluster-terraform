@@ -1,15 +1,12 @@
-FROM node:10
+FROM node
 
 RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
-COPY nodejs-server-server-generated.zip /usr/src/app/
-
-RUN unzip nodejs-server-server-generated.zip && npm install
+COPY package.json /usr/src/app/
+RUN npm install
 
 COPY . /usr/src/app
 
-EXPOSE 8080
-
-CMD [ "npm", "index.js" ]
+CMD [ "node", "index.js" ]
