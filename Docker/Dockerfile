@@ -1,14 +1,15 @@
-FROM node:14
+FROM node:10
 
-WORKDIR /tmp/
+RUN mkdir -p /usr/src/app
 
-COPY ./nodejs-server-server-generated.zip ./
+WORKDIR /usr/src/app
 
+COPY nodejs-server-server-generated.zip /usr/src/app/
 
-RUN unzip nodejs-server-server-generated.zip && cd nodejs-server-server && npm install -g && npm install -g forever
+RUN unzip nodejs-server-server-generated.zip && npm install
 
-COPY . .
+COPY . /usr/src/app
 
 EXPOSE 8080
 
-CMD [ "node", "index.js" ]
+CMD [ "npm", "index.js" ]
