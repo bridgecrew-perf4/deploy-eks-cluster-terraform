@@ -23,7 +23,7 @@ resource "aws_instance" "ec2-api" {
       "sudo yum-config-manager --enable epel",
       "sudo yum -y install nodejs",
       "cd /tmp/nodejs-server-server",
-      "sudo npm install -g"
+      "sudo npm install -g",
       "sudo npm install -g forever",
       "forever start index.js"
       ]
