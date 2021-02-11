@@ -1,0 +1,32 @@
+pipeline {   
+  agent {
+    node {
+      label 'master'
+    }  
+  }
+  stages {
+    stage('checkout') {
+      steps {
+        checkout scm
+        sh 'git clone https://github.com/chemagey/code-challenge-cloudappi.git'
+        sh 'cd code-challenge-cloudappi/terraform/ec2'
+      }
+    }
+    stage('init') {
+      steps {
+        sh 'terraform init'
+      }
+    }
+    stage('plan') {
+      steps {
+        sh 'terraform plan'
+      }
+    }
+    stage('apply') {
+      steps {
+        sh 'terraform apply --auto-approve'
+        cleanWs()
+      }
+    }
+  }
+}
