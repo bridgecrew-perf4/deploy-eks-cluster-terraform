@@ -9,7 +9,7 @@ resource "aws_instance" "ec2-api" {
     connection {
       type        = "ssh"
       user        = "ec2-user"
-      private_key = "${file("/Users/chema/.ssh/challenger-ssh.pem")}"
+      private_key = "${file("/.ssh/unique_identifier.pem")}"
       host        = "${self.public_ip}"
     }   
     provisioner "file" {
